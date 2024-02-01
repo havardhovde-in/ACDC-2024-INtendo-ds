@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intendo_plumber_api", "Intendo_plumber_api\Intendo_plumber_api.csproj", "{4EDF0D7C-236C-44C1-A9C5-0B670B77F536}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EDF0D7C-236C-44C1-A9C5-0B670B77F536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDF0D7C-236C-44C1-A9C5-0B670B77F536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDF0D7C-236C-44C1-A9C5-0B670B77F536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDF0D7C-236C-44C1-A9C5-0B670B77F536}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32E0C255-4EBB-4809-8AAE-BCD0832D78A9}
+	EndGlobalSection
+EndGlobal
