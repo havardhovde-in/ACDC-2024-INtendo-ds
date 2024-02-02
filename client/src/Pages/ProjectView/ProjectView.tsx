@@ -1,7 +1,6 @@
 import React from "react";
 import PlanImage from "../../Components/PlanImage/PlanImage";
 import RightPanel from "../../Components/RightPanel/RightPanel";
-import { Heading } from "@chakra-ui/react";
 
 type ProjectTypes = {
   name: string;
@@ -10,7 +9,7 @@ type ProjectTypes = {
 const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
   return (
     <>
-      <Heading className="app-container__header">{name}</Heading>
+      <h1 className="app-container__header">{name}</h1>
       <div className="app-container__plan">
         <PlanImage />
       </div>

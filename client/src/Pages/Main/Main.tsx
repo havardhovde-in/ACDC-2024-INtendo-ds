@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@chakra-ui/react";
+import { Button } from "@fluentui/react-components";
 import ProjectView from "../ProjectView/ProjectView";
 
 const Main = () => {
@@ -10,7 +10,7 @@ const Main = () => {
       <div>
         <h1>Select a project</h1>
         <Button
-          colorScheme="blue"
+          appearance="primary"
           onClick={() => setSelectedProject("Rørveien 1")}
         >
           Select project

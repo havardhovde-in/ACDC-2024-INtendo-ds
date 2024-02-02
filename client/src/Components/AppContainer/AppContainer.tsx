@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./AppContainer.scss";
-import { Input, Button, Heading } from "@chakra-ui/react";
+import { Input, Button, Text } from "@fluentui/react-components";
 import Main from "../../Pages/Main/Main";
 
 const AppContainer: React.FC = () => {
@@ -9,9 +9,9 @@ const AppContainer: React.FC = () => {
     <div className="app-container">
       {!isLoggedIn ? (
         <div className="app-container__login">
-          <Heading className="app-container__login-header" as="h1">
+          <h1 className="app-container__login-header">
             Log In
-          </Heading>
+          </h1>
           <form>
             <div className="app-container__login-form">
               <label htmlFor="username">Username</label>
@@ -22,7 +22,7 @@ const AppContainer: React.FC = () => {
               <Input type="password" id="password" />
             </div>
             <Button
-              colorScheme="blue"
+              appearance="primary"
               className="app-container__login-button"
               onClick={() => {
                 setIsLoggedIn(true);

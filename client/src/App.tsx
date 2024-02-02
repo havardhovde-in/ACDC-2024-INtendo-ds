@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
 import Home from "./Pages/Home/Home";
-import { ChakraProvider } from "@chakra-ui/react";
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
 
 function App() {
   return (
-    <ChakraProvider>
+    <FluentProvider theme={teamsLightTheme}>
       <div className="App">
         <Home />
       </div>
-    </ChakraProvider>
+    </FluentProvider>
   );
 }
 
