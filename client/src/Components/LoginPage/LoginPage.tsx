@@ -21,8 +21,9 @@ const LoginPage: React.FC = () => {
     getOrders();
     setIsLoggedIn(true);
   };
+
   return (
-    <div className="login-page" >
+    <div className="login-page">
       {!isLoggedIn ? (
         <div className="login-page__login">
           <h1 className="login-page__login-header">Sign in to Tubi</h1>
@@ -52,7 +53,7 @@ const LoginPage: React.FC = () => {
               onClick={() => {
                 handleLogin();
               }}
-              style={{ backgroundColor: "#007F0A"}}
+              style={{ backgroundColor: "#007F0A" }}
             >
               Log In
             </Button>
