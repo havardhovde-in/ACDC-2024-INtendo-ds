@@ -1,16 +1,30 @@
 .app-container {
-  color: white;
+  //   color: white;
   height: 80vh;
   width: 60vw;
-  border: 1px solid white;
+  border: 1px solid black;
   margin-top: 2rem;
   display: block;
   position: relative;
   padding: 1rem;
 
-  &__header {
-    color: white;
+  &__login {
+    margin: auto;
+    width: 50%;
   }
+
+  &__login-header {
+    margin-bottom: 1rem;
+  }
+
+  &__login-button {
+    margin-top: 1rem;
+  }
+
+  // &__header {
+  // color: white;
+  // }
+
   &__plan {
     height: 88%;
     float: left;

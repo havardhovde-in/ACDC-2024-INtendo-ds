@@ -1,0 +1,9 @@
+.rightPanel {
+  display: flex;
+  &__menu {
+    color: white;
+    &--button {
+      color: white;
+    }
+  }
+}
