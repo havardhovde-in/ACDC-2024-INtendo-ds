@@ -4,6 +4,7 @@ import ProjectView from "../ProjectView/ProjectView";
 import "./OrderOverview.scss";
 import { Order } from "../../Types/Orders";
 import Plan from "../../assets/plan.png";
+import Avatar from "../../assets/Sofie.png"
 
 type MainProps = {
   orders: Order[];
@@ -19,6 +20,9 @@ const OrderOverview: React.FC<MainProps> = ({ orders }) => {
   if (!selectedOrder)
     return (
       <div className="main">
+        <img className="orderOverview_avatar" src={Avatar} alt="avatar">
+        </img>
+
         <h1>My projects</h1>
         <div className="order-buttons">
           {orders.map((order) => {
