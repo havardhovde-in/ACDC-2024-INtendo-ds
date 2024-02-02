@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Avatar } from "@chakra-ui/react";
+import { Input, Avatar } from "@fluentui/react-components";
 import "./RightPanel.scss";
 
 const RightPanel: React.FC = () => {

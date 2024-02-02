@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PlanImage from "../../Components/PlanImage/PlanImage";
 import RightPanel from "../../Components/RightPanel/RightPanel";
-import { Button, Heading } from "@chakra-ui/react";
-import "./ProjectView.scss";
 
 type ProjectTypes = {
   name: string;
@@ -38,7 +36,7 @@ const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
 
   return (
     <>
-      <Heading className="app-container__header">{name}</Heading>
+      <h1 className="app-container__header">{name}</h1>
       <div className="app-container__plan">
         <PlanImage src={newImage ? newImage : file} />
         <input onChange={(e) => handleFileChange(e)} type="file" />
