@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import "./AppContainer.scss";
+import "./LoginPage.scss";
 import { Input, Button } from "@fluentui/react-components";
 import Main from "../../Pages/Main/Main";
 
-const AppContainer: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div className="app-container">
+    <div className="login-page">
       {!isLoggedIn ? (
-        <div className="app-container__login">
-          <h1 className="app-container__login-header">Log In</h1>
+        <div className="login-page__login">
+          <h1 className="login-page__login-header">Log In</h1>
           <form>
-            <div className="app-container__login-form">
+            <div className="login-page__login-form">
               <label
-                className="app-container__login-form--label"
+                className="login-page__login-form--label"
                 htmlFor="username"
               >
                 Username:
               </label>
               <Input type="text" id="username" />
             </div>
-            <div className="app-container__login-form">
+            <div className="login-page__login-form">
               <label
-                className="app-container__login-form--label"
+                className="login-page__login-form--label"
                 htmlFor="password"
               >
                 Password:
@@ -31,7 +31,7 @@ const AppContainer: React.FC = () => {
             </div>
             <Button
               appearance="primary"
-              className="app-container__login-button"
+              className="login-page__login-button"
               onClick={() => {
                 setIsLoggedIn(true);
               }}
@@ -47,4 +47,4 @@ const AppContainer: React.FC = () => {
   );
 };
 
-export default AppContainer;
+export default LoginPage;
