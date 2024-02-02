@@ -2,31 +2,40 @@ import React, { useState } from "react";
 import { Button } from "@fluentui/react-components";
 import ProjectView from "../ProjectView/ProjectView";
 import "./Main.scss";
+import { Order } from "../../Types/Orders";
 
-const Main = () => {
-  const [selectedProject, setSelectedProject] = useState<string>("");
+type MainProps = {
+  orders: Order[];
+};
 
-  if (!selectedProject)
+const Main: React.FC<MainProps> = ({ orders }) => {
+  const [selectedOrder, setSelectedOrder] = useState<Order>();
+
+  React.useEffect(() => {
+    console.log(orders);
+  }, [orders]);
+
+  if (!selectedOrder)
     return (
       <div className="main">
         <h1>Select an order</h1>
         <div className="order-buttons">
-          <Button
-            appearance="primary"
-            onClick={() => setSelectedProject("Rørveien 1")}
-          >
-            Order 1
-          </Button>{" "}
-          <Button
-            appearance="primary"
-            onClick={() => setSelectedProject("Rørveien 1")}
-          >
-            Order 2
-          </Button>
+          {orders.map((order) => {
+            return (
+              <Button
+                key={order.orderId}
+                appearance="primary"
+                onClick={() => setSelectedOrder(order)}
+              >
+                {order!.shippingAddress.street}
+              </Button>
+            );
+          })}
         </div>
       </div>
     );
-  return <ProjectView name={selectedProject} />;
+  if (selectedOrder) return <ProjectView order={selectedOrder} />;
+  return <></>;
 };
 
 export default Main;

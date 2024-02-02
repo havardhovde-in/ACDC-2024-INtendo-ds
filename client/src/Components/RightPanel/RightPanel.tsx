@@ -1,12 +1,32 @@
 import React from "react";
-import { Avatar } from "@fluentui/react-components";
 import "./RightPanel.scss";
+import { Order } from "../../Types/Orders";
 
-const RightPanel: React.FC = () => {
+type RightPanelTypes = {
+  order: Order;
+};
+
+const RightPanel: React.FC<RightPanelTypes> = ({ order }) => {
   return (
     <div className="right-panel">
       <div className="right-panel__menu">
-        <Avatar name="Fyr Pilsesen" />
+        <h2>Order details</h2>
+        <ul>
+          <li>Customer name: {order.customerName}</li>
+          <li>Customer email: {order.customerEmail}</li>
+          <li>Shipping Address: {order.shippingAddress.street}</li>
+          <li>Order Status: {order.status}</li>
+        </ul>
+        <h2>Order items</h2>
+        <ul>
+          {order.items.map((item, index) => {
+            return (
+              <li key={index}>
+                {item.productName} - {item.price.toFixed()}NOK
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
