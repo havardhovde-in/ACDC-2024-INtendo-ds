@@ -14,15 +14,15 @@ using System.Threading.Tasks;
 
 namespace Intendo_plumber_api.Functions;
 
-public class CreateProjectFunction
+public class CreateOrderFunction
 {
   private readonly Config _config;
-  public CreateProjectFunction(IOptions<Config> config)
+  public CreateOrderFunction(IOptions<Config> config)
   {
     _config = config.Value;
   }
 
-  [FunctionName("create-commission")]
+  [FunctionName("create-order")]
   public async Task<IActionResult> Run(
       [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
       ILogger log)
