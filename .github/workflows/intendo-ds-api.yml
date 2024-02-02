@@ -5,7 +5,7 @@ on:
     - main
 env:
   AZURE_FUNCTIONAPP_NAME: intendo-ds-api
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: Intendo_plumber_api\published
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: Intendo_plumber_api\Intendo_plumber_api\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: Intendo_plumber_api\Intendo_plumber_api
@@ -42,5 +42,5 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        publish-profile: ${{ secrets.intendo_ds_api_C5EB }}
+        publish-profile: ${{ secrets.intendo_ds_api_D021 }}
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
