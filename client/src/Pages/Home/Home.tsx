@@ -1,8 +1,8 @@
 import React from "react";
-import AppContainer from "../../Components/AppContainer/AppContainer";
+import LoginPage from "../../Components/LoginPage/LoginPage";
 
 const Home: React.FC = () => {
-  return <AppContainer />;
+  return <LoginPage />;
 };
 
 export default Home;
