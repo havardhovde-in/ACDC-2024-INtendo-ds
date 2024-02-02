@@ -1,4 +1,4 @@
-.app-container {
+.login-page {
   height: 80vh;
   width: 40vw;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
@@ -8,6 +8,7 @@
   padding: 1rem;
   background-color: white;
   border-radius: 10px;
+  text-align: left;
 
   &__login {
     margin: auto;

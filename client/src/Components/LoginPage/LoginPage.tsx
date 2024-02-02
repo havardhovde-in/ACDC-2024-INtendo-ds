@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./AppContainer.scss";
+import "./LoginPage.scss";
 import { Input, Button } from "@fluentui/react-components";
 import Main from "../../Pages/Main/Main";
 import { apiCode } from "../../Constants/Constants";
 import { Order } from "../../Types/Orders";
 
-const AppContainer: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [orders, setOrders] = useState<Order[] | undefined>();
 
@@ -22,23 +22,24 @@ const AppContainer: React.FC = () => {
     setIsLoggedIn(true);
   };
   return (
-    <div className="app-container">
+    <div className="login-page" >
       {!isLoggedIn ? (
-        <div className="app-container__login">
-          <h1 className="app-container__login-header">Log In</h1>
+        <div className="login-page__login">
+          <h1 className="login-page__login-header">Sign in to Tubi</h1>
+          <p>Log in with email</p>
           <form>
-            <div className="app-container__login-form">
+            <div className="login-page__login-form">
               <label
-                className="app-container__login-form--label"
+                className="login-page__login-form--label"
                 htmlFor="username"
               >
                 Username:
               </label>
               <Input type="text" id="username" />
             </div>
-            <div className="app-container__login-form">
+            <div className="login-page__login-form">
               <label
-                className="app-container__login-form--label"
+                className="login-page__login-form--label"
                 htmlFor="password"
               >
                 Password:
@@ -47,10 +48,11 @@ const AppContainer: React.FC = () => {
             </div>
             <Button
               appearance="primary"
-              className="app-container__login-button"
+              className="login-page__login-button"
               onClick={() => {
                 handleLogin();
               }}
+              style={{ backgroundColor: "#007F0A"}}
             >
               Log In
             </Button>
@@ -64,4 +66,4 @@ const AppContainer: React.FC = () => {
   );
 };
 
-export default AppContainer;
+export default LoginPage;
