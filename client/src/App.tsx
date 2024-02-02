@@ -8,11 +8,18 @@ import BackgroundRight from "./assets/sm-plain.png";
 function App() {
   return (
     <div className="App">
-      <img className="App__background"src={Background}></img>
-      <img className="App__bgimage_left"src={BackgroundLeft}></img>
-      <img className="App__bgimage_right"src={BackgroundRight}></img>
+      <img className="App__background" src={Background} alt="background"></img>
+      <img
+        className="App__bgimage_left"
+        src={BackgroundLeft}
+        alt="left background"
+      ></img>
+      <img
+        className="App__bgimage_right"
+        src={BackgroundRight}
+        alt="right-background"
+      ></img>
 
-     
       <Home />
     </div>
   );
