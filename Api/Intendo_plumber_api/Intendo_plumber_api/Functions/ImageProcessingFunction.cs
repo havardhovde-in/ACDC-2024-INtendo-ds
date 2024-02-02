@@ -1,3 +1,4 @@
+using Intendo_plumber_api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
@@ -5,12 +6,15 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Processing;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using PointF = SixLabors.ImageSharp.PointF;
 
@@ -24,7 +28,7 @@ public class ImageProcessingFunction
     _config = config.Value;
   }
 
-  [FunctionName("ImageProcessingFunction")]
+  [FunctionName("process-image")]
   public async Task<IActionResult> Run(
       [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
       ILogger log)
@@ -33,6 +37,8 @@ public class ImageProcessingFunction
     {
       Endpoint = _config.PredictionEndpoint
     };
+
+    string orderId = req.Query["orderId"];
 
     try
     {
@@ -85,17 +91,16 @@ public class ImageProcessingFunction
         var size = 5;
 
         var squarePoints = new PointF[]{
-        new(initialXCoord - size, initialYCoord - size),
-        new(initialXCoord + size, initialYCoord - size),
-        new(initialXCoord + size, initialYCoord + size),
-        new(initialXCoord - size, initialYCoord + size)
-};
+          new(initialXCoord - size, initialYCoord - size),
+          new(initialXCoord + size, initialYCoord - size),
+          new(initialXCoord + size, initialYCoord + size),
+          new(initialXCoord - size, initialYCoord + size)
+        };
 
         // Draw the square on the image
         image.Mutate(x => x.DrawPolygon(new DrawingOptions(), new SolidBrush(Color.Gold), penWidth, squarePoints));
-
-        float yOffset = 10; // Vertical offset between the starting points of each line
-
+        var pipeProduct = Constants.PipeProduct;
+        var orderItems = new List<OrderItem>();
         foreach (var detectedObject in detections.Where(x => x.Tag != "Main pipe"))
         {
           var brush = new SolidBrush(Color.Blue);
@@ -103,16 +108,25 @@ public class ImageProcessingFunction
           var objectCenterX = (float)(detectedObject.BoundingBox.Left + detectedObject.BoundingBox.Width / 2);
           var objectCenterY = (float)(detectedObject.BoundingBox.Top + detectedObject.BoundingBox.Height / 2);
 
-
           // Calculate the starting y-coordinate for this line
-          var startYCoord = initialYCoord; // + yOffset + (detections.IndexOf(detectedObject) * 5);
+          var startYCoord = initialYCoord;
 
           // Draw the parallel line segment
           image.Mutate(x => x.DrawLine(new DrawingOptions(), brush, penWidth, new PointF(initialXCoord, startYCoord), new PointF(objectCenterX, startYCoord)));
 
           // Draw the diverging line segment
           image.Mutate(x => x.DrawLine(new DrawingOptions(), brush, penWidth, new PointF(objectCenterX, startYCoord), new PointF(objectCenterX, objectCenterY)));
+
+          orderItems.Add(new OrderItem
+          {
+            ProductId = pipeProduct.ProductId,
+            ProductName = pipeProduct.ProductName,
+            ProductImage = pipeProduct.ImageUrl,
+            Price = pipeProduct.UnitPrice * Math.Abs(initialXCoord - objectCenterX)
+          });
+
         }
+        await UpdateOrder(orderId, orderItems);
       }
       catch (Exception e)
       {
@@ -128,5 +142,22 @@ public class ImageProcessingFunction
       log.LogError($"Exception: {e.Message}");
       return new StatusCodeResult(500);
     }
+  }
+
+  private async Task UpdateOrder(string orderId, List<OrderItem> orderItems)
+  {
+    var blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(_config.StorageAccountConnectionstring);
+    var containerClient = blobServiceClient.GetBlobContainerClient(Constants.Containers.Orders);
+
+    var blobClient = containerClient.GetBlobClient($"{orderId}.json");
+    var blobStream = await blobClient.OpenReadAsync();
+    using var reader = new StreamReader(blobStream);
+    var jsonContent = await reader.ReadToEndAsync();
+    var existingOrder = JsonConvert.DeserializeObject<Order>(jsonContent);
+    existingOrder.Items = orderItems;
+    var orderString = JsonConvert.SerializeObject(existingOrder);
+    await blobClient.DeleteAsync();
+    await containerClient.UploadBlobAsync($"{orderId}.json", new MemoryStream(Encoding.UTF8.GetBytes(orderString)));
+
   }
 }
