@@ -136,13 +136,12 @@ public class ImageProcessingFunction
       image.Save(outStream, new SixLabors.ImageSharp.Formats.Png.PngEncoder());
       outStream.Position = 0;
 
-      //Uploading image
       var blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(_config.StorageAccountConnectionstring);
       var containerClient = blobServiceClient.GetBlobContainerClient(Constants.Containers.Images);
       var blobClient = containerClient.GetBlobClient($"{orderId}.png");
       if (blobClient.Exists())
       {
-        blobClient.Upload(outStream);
+        blobClient.Upload(outStream, true);
       }
       else
       {
