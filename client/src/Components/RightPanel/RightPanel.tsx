@@ -9,7 +9,6 @@ const RightPanel: React.FC = () => {
       <h2>Right panel</h2>
       <div className="right-panel__menu">
         <Avatar name="Fyr Pilsesen" />
-        <Input placeholder="hei" onChange={(e) => setValue(e.target.value)} />
         <p>{value}</p>
       </div>
     </div>
