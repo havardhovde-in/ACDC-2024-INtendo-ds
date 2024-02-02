@@ -1,9 +1,29 @@
+
+
 .App {
-  background-color: #bdfbf3;
+  background-color: #BDFBF3;
   text-align: center;
   display: flex;
   justify-content: center;
   height: 100vh;
+}
+
+.App__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.App__bgimage_left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.App__bgimage_right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 /* .App-logo {
