@@ -1,5 +1,4 @@
 import React from "react";
-import plan from "../../assets/plan.png";
 import "./PlanImage.scss";
 
 type PlanImageProps = {
@@ -7,6 +6,7 @@ type PlanImageProps = {
 };
 
 const PlanImage: React.FC<PlanImageProps> = ({ src }) => {
+  if (!src) return <></>;
   return <img className="plan-image" src={src} alt="plan" />;
 };
 

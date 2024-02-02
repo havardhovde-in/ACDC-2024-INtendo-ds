@@ -1,3 +1,14 @@
+.project-view {
+  height: 80vh;
+  width: 60vw;
+
+  display: block;
+  position: relative;
+  &__plan {
+    height: 70%;
+    float: left;
+  }
+}
 .imagepreview {
   height: 100px;
 }

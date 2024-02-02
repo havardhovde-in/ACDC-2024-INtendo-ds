@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PlanImage from "../../Components/PlanImage/PlanImage";
 import RightPanel from "../../Components/RightPanel/RightPanel";
+import { Button } from "@fluentui/react-components";
+import "./ProjectView.scss";
 
 type ProjectTypes = {
   name: string;
@@ -35,20 +37,21 @@ const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
   };
 
   return (
-    <>
-      <h1 className="app-container__header">{name}</h1>
-      <div className="app-container__plan">
-        <PlanImage src={newImage ? newImage : file} />
+    <div className="project-view">
+      <h1 className="project-view__header">{name}</h1>
+      <div className="project-view__plan">
+        <PlanImage
+          src={newImage ? newImage : file ? URL.createObjectURL(file) : ""}
+        />
         <input onChange={(e) => handleFileChange(e)} type="file" />
-        <img className="imagepreview" src={file} alt="uploaded" />
-        <Button colorScheme="blue" onClick={() => uploadImage(file)}>
-          Send
+        <Button appearance="primary" onClick={() => uploadImage(file)}>
+          Generate
         </Button>
       </div>
-      <div className="app-container__right-panel">
+      <div className="project-view__right-panel">
         <RightPanel />
       </div>
-    </>
+    </div>
   );
 };
 

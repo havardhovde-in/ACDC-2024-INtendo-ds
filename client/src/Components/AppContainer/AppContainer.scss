@@ -1,16 +1,24 @@
 .app-container {
-  //   color: white;
   height: 80vh;
-  width: 60vw;
-  border: 1px solid black;
+  width: 40vw;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   margin-top: 2rem;
   display: block;
   position: relative;
   padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
 
   &__login {
     margin: auto;
     width: 50%;
+  }
+
+  &__login-form {
+    margin-bottom: 1rem;
+    &--label {
+      margin-right: 1rem;
+    }
   }
 
   &__login-header {
