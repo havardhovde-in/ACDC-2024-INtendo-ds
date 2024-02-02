@@ -4,6 +4,7 @@ using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Processing;
@@ -16,18 +17,23 @@ using PointF = SixLabors.ImageSharp.PointF;
 namespace Intendo_plumber_api;
 
 
-public static class ImageProcessingFunction
+public class ImageProcessingFunction
 {
+  private readonly Config _config;
+  public ImageProcessingFunction(IOptions<Config> config)
+  {
+    _config = config.Value;
+  }
+
   [FunctionName("ImageProcessingFunction")]
-  public static async Task<IActionResult> Run(
+  public async Task<IActionResult> Run(
       [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
       ILogger log)
   {
-    log.LogInformation("C# HTTP trigger function processed a request.");
 
-    var predictionClient = new CustomVisionPredictionClient(new ApiKeyServiceClientCredentials("ee9c1977183c4024b2d95cad0bdf403c"))
+    var predictionClient = new CustomVisionPredictionClient(new ApiKeyServiceClientCredentials(_config.PredictionKey))
     {
-      Endpoint = "https://intendods-prediction.cognitiveservices.azure.com/"
+      Endpoint = _config.PredictionEndpoint
     };
 
     try
@@ -46,11 +52,11 @@ public static class ImageProcessingFunction
       try
       {
         stream.Position = 0;
-        var aiResponse = await predictionClient.DetectImageAsync(new Guid("39d6cd22-234d-46bc-b6a8-72e25279ecea"), "Iteration1", stream);
+        var aiResponse = await predictionClient.DetectImageAsync(_config.ProjectId, _config.IterationName, stream);
 
         var predictionDetections = aiResponse.Predictions.ToList();
 
-        var detections = predictionDetections.Where(x => x.Probability > .77).Select(x => new DetectedObject
+        var detections = predictionDetections.Where(x => x.Probability > .90).Select(x => new DetectedObject
         {
           BoundingBox = new BoundingBox
           {
@@ -101,7 +107,7 @@ public static class ImageProcessingFunction
 
 
           // Calculate the starting y-coordinate for this line
-          var startYCoord = initialYCoord + yOffset + (detections.IndexOf(detectedObject) * 5);
+          var startYCoord = initialYCoord; // + yOffset + (detections.IndexOf(detectedObject) * 5);
 
           // Draw the parallel line segment
           image.Mutate(x => x.DrawLine(new DrawingOptions(), brush, penWidth, new PointF(initialXCoord, startYCoord), new PointF(objectCenterX, startYCoord)));
