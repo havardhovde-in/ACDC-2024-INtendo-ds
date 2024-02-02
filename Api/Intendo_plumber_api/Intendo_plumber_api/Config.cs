@@ -7,4 +7,5 @@ public class Config
   public Guid ProjectId { get; set; }
   public string IterationName { get; set; }
   public string PredictionEndpoint { get; set; }
+  public string StorageAccountConnectionstring { get; set; }
 }
