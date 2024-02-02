@@ -7,7 +7,7 @@ import BackgroundRight from "./assets/sm-plain.png";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{color:"#424242"}}>
       <img className="App__background" src={Background} alt="background"></img>
       <img
         className="App__bgimage_left"

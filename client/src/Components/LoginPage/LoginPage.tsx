@@ -6,10 +6,11 @@ import Main from "../../Pages/Main/Main";
 const LoginPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div className="login-page">
+    <div className="login-page" >
       {!isLoggedIn ? (
         <div className="login-page__login">
-          <h1 className="login-page__login-header">Log In</h1>
+          <h1 className="login-page__login-header">Sign in to Tubi</h1>
+          <p>Log in with email</p>
           <form>
             <div className="login-page__login-form">
               <label
@@ -35,6 +36,7 @@ const LoginPage: React.FC = () => {
               onClick={() => {
                 setIsLoggedIn(true);
               }}
+              style={{ backgroundColor: "#007F0A"}}
             >
               Log In
             </Button>
