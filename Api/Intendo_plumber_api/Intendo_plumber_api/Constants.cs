@@ -14,6 +14,8 @@ public static class Constants
   public static class Containers
   {
     public static readonly string Orders = "orders";
+    public static readonly string Images = "images";
+
   }
 
   public static Product PipeProduct = new()

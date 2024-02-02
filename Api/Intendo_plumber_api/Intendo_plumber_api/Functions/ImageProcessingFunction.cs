@@ -135,6 +135,21 @@ public class ImageProcessingFunction
       var outStream = new MemoryStream();
       image.Save(outStream, new SixLabors.ImageSharp.Formats.Png.PngEncoder());
       outStream.Position = 0;
+
+      //Uploading image
+      var blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(_config.StorageAccountConnectionstring);
+      var containerClient = blobServiceClient.GetBlobContainerClient(Constants.Containers.Images);
+      var blobClient = containerClient.GetBlobClient($"{orderId}.png");
+      if (blobClient.Exists())
+      {
+        blobClient.Upload(outStream);
+      }
+      else
+      {
+        await containerClient.UploadBlobAsync($"{orderId}.png", outStream);
+      }
+
+      outStream.Position = 0;
       return new FileStreamResult(outStream, "image/png");
     }
     catch (Exception e)
@@ -156,8 +171,7 @@ public class ImageProcessingFunction
     var existingOrder = JsonConvert.DeserializeObject<Order>(jsonContent);
     existingOrder.Items = orderItems;
     var orderString = JsonConvert.SerializeObject(existingOrder);
-    await blobClient.DeleteAsync();
-    await containerClient.UploadBlobAsync($"{orderId}.json", new MemoryStream(Encoding.UTF8.GetBytes(orderString)));
+    await blobClient.UploadAsync(new MemoryStream(Encoding.UTF8.GetBytes(orderString)), true);
 
   }
 }

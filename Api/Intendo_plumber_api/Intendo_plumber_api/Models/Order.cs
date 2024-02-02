@@ -11,6 +11,8 @@ public class Order
   public List<OrderItem> Items { get; set; }
   public decimal TotalAmount { get; set; }
   public ShippingAddress ShippingAddress { get; set; }
+  public string Status { get; set; } = "Open";
+
 }
 
 public class OrderItem
@@ -20,7 +22,6 @@ public class OrderItem
   public int Quantity { get; set; }
   public float Price { get; set; }
   public string ProductImage { get; set; }
-  public int Length { get; set; }
 }
 
 public class ShippingAddress

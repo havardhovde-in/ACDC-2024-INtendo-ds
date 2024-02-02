@@ -26,7 +26,6 @@ public class GetOrders
       [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
       ILogger log)
   {
-    var createOrderDto = JsonConvert.DeserializeObject<Order>(await req.ReadAsStringAsync());
     var blobServiceClient = new Azure.Storage.Blobs.BlobServiceClient(_config.StorageAccountConnectionstring);
     var containerClient = blobServiceClient.GetBlobContainerClient(Constants.Containers.Orders);
 
