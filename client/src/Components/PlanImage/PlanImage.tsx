@@ -1,9 +1,13 @@
 import React from "react";
-import plan from "../../assets/plan.png";
 import "./PlanImage.scss";
 
-const PlanImage: React.FC = () => {
-  return <img className="plan-image" src={plan} alt="plan" />;
+type PlanImageProps = {
+  src?: any;
+};
+
+const PlanImage: React.FC<PlanImageProps> = ({ src }) => {
+  if (!src) return <></>;
+  return <img className="plan-image" src={src} alt="plan" />;
 };
 
 export default PlanImage;
