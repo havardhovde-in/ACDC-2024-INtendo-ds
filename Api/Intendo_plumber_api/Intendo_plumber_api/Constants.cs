@@ -9,6 +9,4 @@ public static class Constants
     public static readonly string Toilet = "Toilet";
     public static readonly string Shower = "Shower";
   }
-
-
 }

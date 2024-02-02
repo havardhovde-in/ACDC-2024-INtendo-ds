@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Function App intendo-ds-api
 on:
   push:
     branches:
-    - feature/ImageAnalysis
+    - main
 env:
   AZURE_FUNCTIONAPP_NAME: intendo-ds-api
   AZURE_FUNCTIONAPP_PACKAGE_PATH: Intendo_plumber_api\published
