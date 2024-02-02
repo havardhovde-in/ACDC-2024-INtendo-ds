@@ -3,17 +3,18 @@ import PlanImage from "../../Components/PlanImage/PlanImage";
 import RightPanel from "../../Components/RightPanel/RightPanel";
 import { Button } from "@fluentui/react-components";
 import "./ProjectView.scss";
+import { apiCode } from "../../Constants/Constants";
+import { Order } from "../../Types/Orders";
 
 type ProjectTypes = {
-  name: string;
+  order: Order;
 };
 
-const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
+const ProjectView: React.FC<ProjectTypes> = ({ order }) => {
   const [file, setFile] = useState<any>(null);
   const [newImage, setNewImage] = useState<any>(null);
 
-  const url =
-    "https://intendo-ds-api.azurewebsites.net/api/ImageProcessingFunction?code=3UNxNagTqx8YUh8UExPAoZ2R__Iu7utvubIjYbxEry-xAzFu2NKqbA==";
+  const url = `https://intendo-ds-api.azurewebsites.net/api/process-image?code=${apiCode}&orderId=${order.orderId}`;
 
   const uploadImage = async (file: File) => {
     const formData = new FormData();
@@ -38,7 +39,7 @@ const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
 
   return (
     <div className="project-view">
-      <h1 className="project-view__header">{name}</h1>
+      <h1 className="project-view__header">{order!.shippingAddress.street}</h1>
       <div className="project-view__plan">
         <PlanImage
           src={newImage ? newImage : file ? URL.createObjectURL(file) : ""}
@@ -49,7 +50,7 @@ const ProjectView: React.FC<ProjectTypes> = ({ name }) => {
         </Button>
       </div>
       <div className="project-view__right-panel">
-        <RightPanel />
+        <RightPanel order={order} />
       </div>
     </div>
   );
