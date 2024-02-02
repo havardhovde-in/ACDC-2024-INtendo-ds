@@ -14,8 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PointF = SixLabors.ImageSharp.PointF;
 
-namespace Intendo_plumber_api;
-
+namespace Intendo_plumber_api.Functions;
 
 public class ImageProcessingFunction
 {
@@ -27,10 +26,9 @@ public class ImageProcessingFunction
 
   [FunctionName("ImageProcessingFunction")]
   public async Task<IActionResult> Run(
-      [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+      [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
       ILogger log)
   {
-
     var predictionClient = new CustomVisionPredictionClient(new ApiKeyServiceClientCredentials(_config.PredictionKey))
     {
       Endpoint = _config.PredictionEndpoint
@@ -38,8 +36,8 @@ public class ImageProcessingFunction
 
     try
     {
-      using var stream = new MemoryStream();
-      await req.Body.CopyToAsync(stream);
+      var file = req.Form.Files.FirstOrDefault();
+      var stream = file.OpenReadStream();
       stream.Position = 0;
 
       // Define the color for the brush and the width for the pen
@@ -73,14 +71,14 @@ public class ImageProcessingFunction
 
         foreach (var detectedObject in detections)
         {
-          float objectCenterX = (float)(detectedObject.BoundingBox.Left + (detectedObject.BoundingBox.Width / 2));
-          float objectCenterY = (float)(detectedObject.BoundingBox.Top + (detectedObject.BoundingBox.Height / 2));
+          float objectCenterX = (float)(detectedObject.BoundingBox.Left + detectedObject.BoundingBox.Width / 2);
+          float objectCenterY = (float)(detectedObject.BoundingBox.Top + detectedObject.BoundingBox.Height / 2);
 
           // Check if the object is tagged as "mainpipe"
           if (detectedObject.Tag == "Main pipe")
           {
-            initialXCoord = (float)(detectedObject.BoundingBox.Left + (detectedObject.BoundingBox.Width / 2));
-            initialYCoord = (float)(detectedObject.BoundingBox.Top + (detectedObject.BoundingBox.Height / 2));
+            initialXCoord = (float)(detectedObject.BoundingBox.Left + detectedObject.BoundingBox.Width / 2);
+            initialYCoord = (float)(detectedObject.BoundingBox.Top + detectedObject.BoundingBox.Height / 2);
             break;
           }
         }
@@ -102,8 +100,8 @@ public class ImageProcessingFunction
         {
           var brush = new SolidBrush(Color.Blue);
 
-          var objectCenterX = (float)(detectedObject.BoundingBox.Left + (detectedObject.BoundingBox.Width / 2));
-          var objectCenterY = (float)(detectedObject.BoundingBox.Top + (detectedObject.BoundingBox.Height / 2));
+          var objectCenterX = (float)(detectedObject.BoundingBox.Left + detectedObject.BoundingBox.Width / 2);
+          var objectCenterY = (float)(detectedObject.BoundingBox.Top + detectedObject.BoundingBox.Height / 2);
 
 
           // Calculate the starting y-coordinate for this line

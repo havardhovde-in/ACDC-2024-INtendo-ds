@@ -9,4 +9,9 @@ public static class Constants
     public static readonly string Toilet = "Toilet";
     public static readonly string Shower = "Shower";
   }
+  public static class Containers
+  {
+    public static readonly string Orders = "orders";
+  }
+  public static string PartitionKey = nameof(PartitionKey);
 }
