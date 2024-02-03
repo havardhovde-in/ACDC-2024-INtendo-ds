@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { Button } from "@fluentui/react-components";
 import ProjectView from "../ProjectView/ProjectView";
-import "./Main.scss";
+import "./OrderOverview.scss";
 import { Order } from "../../Types/Orders";
 
 type MainProps = {
   orders: Order[];
 };
 
-const Main: React.FC<MainProps> = ({ orders }) => {
+const OrderOverview: React.FC<MainProps> = ({ orders }) => {
   const [selectedOrder, setSelectedOrder] = useState<Order>();
-
-  React.useEffect(() => {
-    console.log(orders);
-  }, [orders]);
 
   if (!selectedOrder)
     return (
@@ -38,4 +34,4 @@ const Main: React.FC<MainProps> = ({ orders }) => {
   return <></>;
 };
 
-export default Main;
+export default OrderOverview;

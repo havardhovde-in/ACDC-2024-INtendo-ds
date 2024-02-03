@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.scss";
 import { Input, Button } from "@fluentui/react-components";
-import Main from "../../Pages/Main/Main";
+import OrderOverview from "../../Pages/OrderOverview/OrderOverview";
 import { apiCode } from "../../Constants/Constants";
 import { Order } from "../../Types/Orders";
 
@@ -60,8 +60,7 @@ const LoginPage: React.FC = () => {
           </form>
         </div>
       ) : (
-        orders && <Main orders={orders} />
-        // <Main orders={orders} />
+        orders && <OrderOverview orders={orders} />
       )}
     </div>
   );
