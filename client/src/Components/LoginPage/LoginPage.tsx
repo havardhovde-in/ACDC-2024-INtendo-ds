@@ -26,26 +26,26 @@ const LoginPage: React.FC = () => {
     <div className="login-page">
       {!isLoggedIn ? (
         <div className="login-page__login">
-          <h1 className="login-page__login-header">Sign in to Tubi</h1>
-          <p>Log in with email</p>
-          <form>
-            <div className="login-page__login-form">
+          <div className="login-page__login-header"> 
+            <h1>Sign in to Tubi</h1>
+            <p>Log in with email</p>
+          </div>
+          <form className="login-page__login-form-container">
+            <div className="login-page__login-form" >
               <label
                 className="login-page__login-form--label"
                 htmlFor="username"
               >
-                Username:
               </label>
-              <Input type="text" id="username" />
+              <Input type="text" id="username" size="large" placeholder="Username" style={{width: "80%"}}/>
             </div>
             <div className="login-page__login-form">
               <label
                 className="login-page__login-form--label"
                 htmlFor="password"
               >
-                Password:
               </label>
-              <Input type="password" id="password" />
+                <Input type="password" id="password" size="large" placeholder="Password" style={{width: "80%"}}/>
             </div>
             <Button
               appearance="primary"
@@ -53,7 +53,7 @@ const LoginPage: React.FC = () => {
               onClick={() => {
                 handleLogin();
               }}
-              style={{ backgroundColor: "#007F0A" }}
+              style={{ backgroundColor: "#007F0A", marginTop: "20px"}}
             >
               Log In
             </Button>
