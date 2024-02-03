@@ -18,7 +18,7 @@ const OrderOverview: React.FC<MainProps> = ({ orders }) => {
         <img className="orderOverview_avatar" src={Avatar} alt="avatar"></img>
 
         <h1>My projects</h1>
-        <div className="order-buttons">
+        <div className="order-buttons" style={{display: "grid", gridTemplateColumns:"1fr 1fr 1fr 1fr"}}>
           {orders.map((order) => {
             return (
               <OrderCard
