@@ -32,8 +32,9 @@ public class CreateOrderFunction
     var containerClient = blobServiceClient.GetBlobContainerClient(Constants.Containers.Orders);
 
     var blobs = containerClient.GetBlobs();
-    var orderId = int.Parse(blobs.Max(b => b.Name).Replace(".json", ""));
+    var orderId = blobs.Max(b => int.Parse(b.Name.Replace(".json", "")));
     createOrderDto.OrderId = orderId.ToString();
+    createOrderDto.Status = "New";
     try
     {
       var orderString = JsonConvert.SerializeObject(createOrderDto);

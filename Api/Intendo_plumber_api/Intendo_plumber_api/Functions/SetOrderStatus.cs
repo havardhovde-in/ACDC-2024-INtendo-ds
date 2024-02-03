@@ -42,6 +42,7 @@ public class SetOrderStatus
     var jsonContent = await reader.ReadToEndAsync();
     var existingOrder = JsonConvert.DeserializeObject<Order>(jsonContent);
     existingOrder.Status = status;
+    existingOrder.OrderId = orderId;
 
     var orderString = JsonConvert.SerializeObject(existingOrder);
     await blobClient.UploadAsync(new MemoryStream(Encoding.UTF8.GetBytes(orderString)), true);
