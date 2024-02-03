@@ -6,3 +6,11 @@
     float: left;
   }
 }
+
+.plan-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: auto;
+  justify-content: center;
+}
