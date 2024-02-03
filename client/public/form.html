@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Form</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #bdfbf3;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* Added to include padding in element's total width and height */
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        legend {
+            padding: 0 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+<form action="http://localhost:7132/api/create-order" method="get">
+    <label for="CustomerEmail">Customer Email:</label><br>
+    <input type="email" id="CustomerEmail" name="CustomerEmail" value="mats@email.com"><br>
+    
+    <label for="CustomerName">Customer Name:</label><br>
+    <input type="text" id="CustomerName" name="CustomerName" value="Mats Berntsen"><br>
+    
+    <fieldset>
+        <legend>Shipping Address:</legend>
+        
+        <label for="Street">Street:</label><br>
+        <input type="text" id="Street" name="ShippingAddress[Street]" value="Hovinveien 37J"><br>
+        
+        <label for="City">City:</label><br>
+        <input type="text" id="City" name="ShippingAddress[City]" value="Oslo"><br>
+        
+        <label for="State">State:</label><br>
+        <input type="text" id="State" name="ShippingAddress[State]" value="Oslo"><br>
+        
+        <label for="PostalCode">Postal Code:</label><br>
+        <input type="text" id="PostalCode" name="ShippingAddress[PostalCode]" value="0576"><br>
+        
+        <label for="Country">Country:</label><br>
+        <input type="text" id="Country" name="ShippingAddress[Country]" value="Norway"><br>
+    </fieldset>
+    
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
