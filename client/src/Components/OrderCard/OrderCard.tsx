@@ -28,7 +28,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onClick }) => {
 
   return (
     <div className="order-card" onClick={onClick}>
-      <img className="order-card__image" src={imageUrl} alt="floor plan" />
+      {imageUrl &&
+        <img className="order-card__image" src={imageUrl} alt="floor plan" />
+      }
       <h3>{order.shippingAddress.street}</h3>
       <p>Order status: <strong>{order.status}</strong></p>
     </div>
