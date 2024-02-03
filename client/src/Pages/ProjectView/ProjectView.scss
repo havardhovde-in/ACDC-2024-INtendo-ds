@@ -1,13 +1,8 @@
 .project-view {
-  height: 80vh;
-  //   width: 60vw;
-
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   &__plan {
     float: left;
   }
-}
-.imagepreview {
-  height: 100px;
 }

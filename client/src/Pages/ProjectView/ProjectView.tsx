@@ -39,15 +39,21 @@ const ProjectView: React.FC<ProjectTypes> = ({ order }) => {
 
   return (
     <div className="project-view">
-      <h1 className="project-view__header">{order!.shippingAddress.street}</h1>
-      <div className="project-view__plan">
+      <h1 className="project-view__header">Order: {order!.shippingAddress.street}</h1>
+      <div className="project-view__plan white-background" style={{background:"white", borderRadius:"10px", minHeight:"2rem" }}>
+        <h3 style={{textAlign:"center", marginTop: 0}}>Upload floorplan to start analysis</h3>
         <PlanImage
           src={newImage ? newImage : file ? URL.createObjectURL(file) : ""}
         />
+        {!file &&
         <input onChange={(e) => handleFileChange(e)} type="file" />
+        }
+        <br />
+        {file &&
         <Button appearance="primary" onClick={() => uploadImage(file)}>
-          Generate
+          Analyze
         </Button>
+        }
       </div>
       <div className="project-view__right-panel">
         <RightPanel order={order} />
