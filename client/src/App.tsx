@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Home from "./Pages/Home/Home";
 import Background from "./assets/background-clouds.png";
 import BackgroundLeft from "./assets/lg-textured.png";
 import BackgroundRight from "./assets/sm-plain.png";
+import LoginPage from "./Components/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         alt="right-background"
       ></img>
 
-      <Home />
+      <LoginPage />
     </div>
   );
 }
