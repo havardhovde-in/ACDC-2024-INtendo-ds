@@ -1,47 +1,38 @@
 .login-page {
-  height: 70vh;
-  width: 35vw;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-  margin-top: 5rem;
+  height: 80vh;
   display: flex;
   position: relative;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 10px;
-
+  // padding: 1rem;
 
   &__login {
     margin-top: 64px;
-    width: 100%;
-    text-align: left;
+    // width: 100%;
+    // text-align: left;
+    height: 50vh;
   }
 
-  &__login-form-container{
+  &__login-form-container {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-
   }
 
   &__login-form {
     margin-bottom: 1rem;
     width: 100%;
     margin-left: 128px;
-
   }
 
   &__login-header {
     margin-bottom: 1rem;
     margin-left: 64px;
-
   }
 
   &__login-button {
     margin-top: 100vh;
     width: 40%;
     height: 40px;
-
   }
 
   // &__header {

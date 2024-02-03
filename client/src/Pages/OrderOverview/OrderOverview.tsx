@@ -12,10 +12,6 @@ type MainProps = {
 const OrderOverview: React.FC<MainProps> = ({ orders }) => {
   const [selectedOrder, setSelectedOrder] = useState<Order>();
 
-  React.useEffect(() => {
-    console.log(orders);
-  }, [orders]);
-
   if (!selectedOrder)
     return (
       <div className="main">
@@ -30,20 +26,6 @@ const OrderOverview: React.FC<MainProps> = ({ orders }) => {
                 order={order}
                 onClick={() => setSelectedOrder(order)}
               />
-              /*              // <Card key={order.orderId}>
-              //   <CardPreview>
-              //     <img src={Plan} alt="floor plan" />
-              //   </CardPreview>
-              //   <CardHeader header={<p>{order.shippingAddress.street}</p>} />
-              // </Card 
-
-/*               <Button
-                key={order.orderId}
-                appearance="primary"
-                onClick={() => setSelectedOrder(order)}
-              >
-                {order!.shippingAddress.street}
-              </Button> */
             );
           })}
         </div>
