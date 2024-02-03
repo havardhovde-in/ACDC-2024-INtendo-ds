@@ -22,11 +22,12 @@ const RightPanel: React.FC<RightPanelTypes> = ({ order }) => {
           {order.items.map((item, index) => {
             return (
               <li key={index}>
-                {item.productName} - {item.price.toFixed()}NOK
+                {item.productName} - {item.quantity} - {item.price.toFixed()}NOK
               </li>
             );
           })}
         </ul>
+        <p>{order.totalAmount.toFixed()},-</p>
       </div>
     </div>
   );

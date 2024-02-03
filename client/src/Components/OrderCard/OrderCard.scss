@@ -1,0 +1,15 @@
+.order-card {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  &__image {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+  }
+}
