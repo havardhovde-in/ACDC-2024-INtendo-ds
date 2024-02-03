@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardHeader, CardPreview } from "@fluentui/react-components";
+import { Card, CardHeader, CardPreview } from "@fluentui/react-components";
 import ProjectView from "../ProjectView/ProjectView";
 import "./OrderOverview.scss";
 import { Order } from "../../Types/Orders";
@@ -11,7 +11,7 @@ type MainProps = {
 };
 
 const OrderOverview: React.FC<MainProps> = ({ orders }) => {
-  const [selectedOrder, setSelectedOrder] = useState<Order>();
+  const [selectedOrder] = useState<Order>();
 
   React.useEffect(() => {
     console.log(orders);
